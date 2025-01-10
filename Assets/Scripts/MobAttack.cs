@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class MobAttack : AbstractAttack
 {
-    private int MobDamage;
+    public int MobDamage;
 
     void Awake()
     {
-        MobDamage = dmg;
-        _animator = transform.parent.GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
     void OnTriggerStay2D(Collider2D c){

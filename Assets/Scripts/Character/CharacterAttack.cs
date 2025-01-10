@@ -4,21 +4,20 @@ public class CharacterAttack : AbstractAttack
 {
     // скрипт вешать на оружие чарактера
 
-    private int CharacterDmg; // локальный урон 
+    public int WeaponDamage; // бызавый урон оружия урон 
      
     void Awake()
     {
-        CharacterDmg = dmg;
         _animator = transform.parent.GetComponent<Animator>();
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.K)){ // слабая атака
-            Attack(1, CharacterDmg);
+            Attack(1, WeaponDamage);
         }
         if(Input.GetKeyDown(KeyCode.J)){ // сильная атака
-            Attack(2, CharacterDmg * 3); 
+            Attack(2, WeaponDamage * 3); 
         }
     }
 }

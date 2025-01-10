@@ -12,7 +12,7 @@ public class CharacterHealth : AbstractHealth
     {
         if (c.gameObject.CompareTag("Weapon") && !c.transform.IsChildOf(transform))
         {
-            MobAttack mobAttack = c.gameObject.GetComponent<MobAttack>();
+            MobAttack mobAttack = c.gameObject.GetComponentInParent<MobAttack>();
             TakeHit(mobAttack.GetDmg());
         }
     }

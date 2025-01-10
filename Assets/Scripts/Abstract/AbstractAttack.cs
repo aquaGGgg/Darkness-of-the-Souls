@@ -4,8 +4,7 @@ public abstract class AbstractAttack : MonoBehaviour
 {
     protected Animator _animator;
 
-    [SerializeField]
-    protected int dmg;
+    private int dmg;
 
     /// <summary>
     /// метод вызывающий атаку

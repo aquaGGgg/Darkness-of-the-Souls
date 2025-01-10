@@ -214,8 +214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d99ab1835ec4d645b14f7b611352f22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
   MaxHp: 150
+  hp: 100
   healModifier: 20
 --- !u!1 &7121819196291086482
 GameObject:
@@ -364,4 +364,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f05782428002640a4b32ab9922c9bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 5
+  CharacterDmg: 5
