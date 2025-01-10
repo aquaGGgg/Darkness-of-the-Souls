@@ -20,7 +20,7 @@ public abstract class AbstractAttack : MonoBehaviour
     }
 
     /// <summary>
-    /// гетер для урона
+    /// гетер для урона, испоьзовать для TakeHit()
     /// </summary>
     /// <returns></returns>
     public virtual int GetDmg(){
