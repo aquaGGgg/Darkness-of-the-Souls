@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &26094247 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8881892409255074044, guid: ed8d40646ec094145a2a9cea72b37e33, type: 3}
+  m_PrefabInstance: {fileID: 1170503679595526550}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f05782428002640a4b32ab9922c9bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +278,7 @@ GameObject:
   - component: {fileID: 1470478656}
   - component: {fileID: 1470478655}
   - component: {fileID: 1470478654}
+  - component: {fileID: 1470478657}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -390,6 +402,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1470478657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470478653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd1bd46386fd804d8d35acd255c0363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100000
+  dmg: {fileID: 26094247}
 --- !u!1001 &1170503679595526550
 PrefabInstance:
   m_ObjectHideFlags: 0
