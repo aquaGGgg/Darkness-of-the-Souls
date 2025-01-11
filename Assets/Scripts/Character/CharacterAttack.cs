@@ -6,10 +6,7 @@ public class CharacterAttack : AbstractAttack
 
     public int WeaponDamage; // бызавый урон оружия урон 
      
-    void Awake()
-    {
-        _animator = transform.parent.GetComponent<Animator>();
-    }
+
 
     void Update()
     {

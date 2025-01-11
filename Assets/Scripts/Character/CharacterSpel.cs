@@ -7,10 +7,7 @@ public class CharacterSpel : AbstractAttack
     public GameObject[] spels;
     public int StalDamage;
 
-    void Awake()
-    {
-        _animator = GetComponent<Animator>();   
-    }
+
 
 
     void Update()

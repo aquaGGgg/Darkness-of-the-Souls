@@ -364,4 +364,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f05782428002640a4b32ab9922c9bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterDmg: 5
+  _animator: {fileID: 6931908755859238395}
+  WeaponDamage: 0

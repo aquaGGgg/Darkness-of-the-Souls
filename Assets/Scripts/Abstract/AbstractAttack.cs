@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class AbstractAttack : MonoBehaviour
 {
-    protected Animator _animator;
+    public Animator _animator;
 
     private int dmg;
 

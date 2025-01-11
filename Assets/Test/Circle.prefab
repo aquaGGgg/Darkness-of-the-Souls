@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 4912095529965690240}
   - component: {fileID: 6859743193231008630}
   - component: {fileID: 7233816121258718206}
-  - component: {fileID: 6685091374688523346}
   - component: {fileID: 5665763388689841127}
-  - component: {fileID: 3336922109537140325}
   - component: {fileID: 1644093372350864660}
+  - component: {fileID: 3336922109537140325}
+  - component: {fileID: 6685091374688523346}
+  - component: {fileID: 5758903578281082264}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Finish
@@ -139,20 +140,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6685091374688523346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3476818558736401389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cd1bd46386fd804d8d35acd255c0363, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHp: 100
-  hp: 0
 --- !u!95 &5665763388689841127
 Animator:
   serializedVersion: 7
@@ -175,19 +162,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3336922109537140325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3476818558736401389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eff719fe2e7d5a34e8016b398200e603, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MobDamage: 3
 --- !u!61 &1644093372350864660
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -222,7 +196,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -1.11, y: 0}
+  m_Offset: {x: 1.11, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -234,6 +208,50 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.4, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3336922109537140325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3476818558736401389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eff719fe2e7d5a34e8016b398200e603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 5665763388689841127}
+  MobDamage: 3
+--- !u!114 &6685091374688523346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3476818558736401389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd1bd46386fd804d8d35acd255c0363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHp: 100
+  hp: 0
+--- !u!114 &5758903578281082264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3476818558736401389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b6bd5b38800bbf46bc9daecba35ee2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolDistance: 3
+  aggroRadius: 2
+  player: {fileID: 0}
+  stopDistance: 0.5
 --- !u!1 &8474760612189671989
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,13 +278,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8474760612189671989}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.70918, w: 0.7050276}
-  m_LocalPosition: {x: -0.205, y: 0.008, z: -0.1}
-  m_LocalScale: {x: 0.3703, y: 0.3703, z: 0.3703}
+  m_LocalRotation: {x: 0, y: 0, z: -0.709177, w: 0.7050305}
+  m_LocalPosition: {x: 0.157, y: 0.008, z: -0.1}
+  m_LocalScale: {x: -0.3703, y: 0.3703, z: 0.3703}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4912095529965690240}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90.336}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.336}
 --- !u!212 &8496489661225182438
 SpriteRenderer:
   m_ObjectHideFlags: 0
