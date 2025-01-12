@@ -21,13 +21,20 @@ public abstract class AbstractAttack : MonoBehaviour
     /// <summary>
     /// гетер для урона, испоьзовать для TakeHit()
     /// </summary>
-    /// <returns></returns>
+    /// <returns>возврощает урон </returns>
     public virtual int GetDmg(){
         return dmg;
     }
 
 
-    private void ResetAttack(){
+    public virtual void RengAttackSupport()
+    {
+        _animator.SetTrigger("ArrowFlie");
+    }
+
+
+    private void ResetAttack()
+    {
         _animator.SetInteger("AttackType",0);
     }
 

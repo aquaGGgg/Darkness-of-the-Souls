@@ -6,15 +6,18 @@ public class MobAI : MonoBehaviour
     [SerializeField] private float aggroRadius = 2f;    // Радиус агра
     [SerializeField] private Transform player;         // Ссылка на игрока
     [SerializeField] private float stopDistance = 1f;  // Расстояние остановки от игрока
+    [SerializeField] private int speed;                // Скорость моба
 
     private Vector2 _startPosition;
     private Vector2 _targetPosition;
     private bool _isAggroed;
     private bool _returningToPatrol;
+    private Animator _animator;
 
     private void Start()
     {
         _startPosition = transform.position;
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -22,41 +25,42 @@ public class MobAI : MonoBehaviour
         Vector2 playerPosition = player.position;
         float distanceToPlayer = Vector2.Distance(transform.position, playerPosition);
 
-        // Если возвращается на маршрут
         if (_returningToPatrol)
         {
-            float patrolOffset = Mathf.PingPong(Time.time, patrolDistance) - patrolDistance / 2f;
-            _targetPosition = _startPosition + Vector2.right * patrolOffset;
-
-            if (Vector2.Distance(transform.position, _startPosition) <= 0.1f)
-            {
-                _returningToPatrol = false; // Завершил возвращение
-            }
+            HandlePatrolReturn();
         }
         else
         {
-            // Определение агрессии
-            _isAggroed = distanceToPlayer <= aggroRadius && Vector2.Distance(_startPosition, transform.position) <= patrolDistance * 2f;
-
-            if (_isAggroed && distanceToPlayer > stopDistance)
-            {
-                // Гонится за игроком
-                _targetPosition = playerPosition;
-            }
-            else if (!_isAggroed)
-            {
-                _returningToPatrol = true; // Начинает возвращение на маршрут
-            }
+            _isAggroed = distanceToPlayer <= aggroRadius * 2;
+            if (_isAggroed) HandleAggro(playerPosition, distanceToPlayer);
+            else _returningToPatrol = true;
         }
 
-        // Движение к цели
-        Vector2 direction = (_targetPosition - (Vector2)transform.position).normalized;
-        if (direction.x != 0)
-        {
-            // Разворот по направлению движения
-            transform.localScale = new Vector3(Mathf.Sign(direction.x) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        }
+        MoveToTarget();
+        _animator.SetBool("IsWalking", Vector2.Distance(transform.position, _targetPosition) > 0.01f); // Баг анимации из за слишком частого обновления таргета
+    }
 
-        transform.position = Vector2.MoveTowards(transform.position, _targetPosition, Time.deltaTime * 2f);
+    private void HandlePatrolReturn()
+    {
+        _targetPosition = _startPosition + Vector2.right * (Mathf.PingPong(Time.time, patrolDistance) - patrolDistance / 2f);
+        if (Vector2.Distance(transform.position, _startPosition) <= 0.1f) _returningToPatrol = false;
+    }
+
+    private void HandleAggro(Vector2 playerPosition, float distanceToPlayer)
+    {
+        _targetPosition = distanceToPlayer > stopDistance ? playerPosition : transform.position;
+        FlipTowards(playerPosition);
+    }
+
+    private void MoveToTarget()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, _targetPosition, Time.deltaTime * speed);
+        if (!_isAggroed && (_targetPosition - (Vector2)transform.position).x != 0)
+            FlipTowards(_targetPosition);
+    }
+
+    private void FlipTowards(Vector2 targetPosition)
+    {
+        transform.localScale = new Vector3(Mathf.Sign((targetPosition - (Vector2)transform.position).x) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
     }
 }
