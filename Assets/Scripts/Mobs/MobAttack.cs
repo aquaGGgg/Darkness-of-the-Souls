@@ -8,7 +8,7 @@ public class MobAttack : AbstractAttack
 
     void Start()
     {
-        _NumberOfNonEmptyStates = _animator.runtimeAnimatorController.animationClips.Length - 2;// c добовление механик не связаных с атакой моба изменить число
+        _NumberOfNonEmptyStates = _animator.runtimeAnimatorController.animationClips.Length - 3;// c добовление механик не связаных с атакой моба изменить число
     }
 
     void OnTriggerStay2D(Collider2D c){

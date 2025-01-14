@@ -2,65 +2,78 @@ using UnityEngine;
 
 public class MobAI : MonoBehaviour
 {
-    [SerializeField] private float patrolDistance = 5f; // Длина маршрута
-    [SerializeField] private float aggroRadius = 2f;    // Радиус агра
-    [SerializeField] private Transform player;         // Ссылка на игрока
+    [SerializeField] private float patrolDistance = 5f; // Длина маршрута патрулирования
+    [SerializeField] private float aggroRadius = 2f;    // Радиус агра на игрока
+    [SerializeField] private Transform player;         // Ссылка на объект игрока
     [SerializeField] private float stopDistance = 1f;  // Расстояние остановки от игрока
-    [SerializeField] private int speed;                // Скорость моба
+    [SerializeField] private int speed;                // Скорость движения моба
 
-    private Vector2 _startPosition;
+    private Vector2 _leftPatrolPoint;
+    private Vector2 _rightPatrolPoint;
     private Vector2 _targetPosition;
-    private bool _isAggroed;
-    private bool _returningToPatrol;
     private Animator _animator;
 
     private void Start()
     {
-        _startPosition = transform.position;
+        Vector2 startPosition = transform.position;
+        _leftPatrolPoint = startPosition - Vector2.right * patrolDistance / 2f;
+        _rightPatrolPoint = startPosition + Vector2.right * patrolDistance / 2f;
+        _targetPosition = _rightPatrolPoint;
         _animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
+        if (_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("attack") && _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+        {
+            UpdateAnimation();
+            return;
+        }
+
         Vector2 playerPosition = player.position;
         float distanceToPlayer = Vector2.Distance(transform.position, playerPosition);
 
-        if (_returningToPatrol)
+        if (distanceToPlayer <= aggroRadius * 2)
         {
-            HandlePatrolReturn();
+            _targetPosition = distanceToPlayer > stopDistance ? playerPosition : transform.position;
+            FlipTowards(playerPosition);
         }
         else
         {
-            _isAggroed = distanceToPlayer <= aggroRadius * 2;
-            if (_isAggroed) HandleAggro(playerPosition, distanceToPlayer);
-            else _returningToPatrol = true;
+            Patrol();
         }
 
         MoveToTarget();
-        _animator.SetBool("IsWalking", Vector2.Distance(transform.position, _targetPosition) > 0.01f); // Баг анимации из за слишком частого обновления таргета
+        UpdateAnimation();
+
     }
 
-    private void HandlePatrolReturn()
+    private void Patrol()
     {
-        _targetPosition = _startPosition + Vector2.right * (Mathf.PingPong(Time.time, patrolDistance) - patrolDistance / 2f);
-        if (Vector2.Distance(transform.position, _startPosition) <= 0.1f) _returningToPatrol = false;
-    }
-
-    private void HandleAggro(Vector2 playerPosition, float distanceToPlayer)
-    {
-        _targetPosition = distanceToPlayer > stopDistance ? playerPosition : transform.position;
-        FlipTowards(playerPosition);
+        if (Vector2.Distance(transform.position, _targetPosition) <= 0.1f)
+        {
+            _targetPosition = _targetPosition == _leftPatrolPoint ? _rightPatrolPoint : _leftPatrolPoint;
+        }
+        FlipTowards(_targetPosition);
     }
 
     private void MoveToTarget()
     {
         transform.position = Vector2.MoveTowards(transform.position, _targetPosition, Time.deltaTime * speed);
-        if (!_isAggroed && (_targetPosition - (Vector2)transform.position).x != 0)
-            FlipTowards(_targetPosition);
     }
 
     private void FlipTowards(Vector2 targetPosition)
     {
-        transform.localScale = new Vector3(Mathf.Sign((targetPosition - (Vector2)transform.position).x) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        float directionX = targetPosition.x - transform.position.x;
+        if (Mathf.Abs(directionX) > 0.01f)
+        {
+            transform.localScale = new Vector3(Mathf.Sign(directionX) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+    }
+
+    private void UpdateAnimation()
+    {
+        bool isMoving = !(_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("attack") && _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f) && Vector2.Distance(transform.position, _targetPosition) > 0.05f;
+        _animator.SetBool("IsWalking", isMoving);
     }
 }

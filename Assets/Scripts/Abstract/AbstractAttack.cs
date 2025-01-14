@@ -27,11 +27,10 @@ public abstract class AbstractAttack : MonoBehaviour
     }
 
 
-    public virtual void RengAttackSupport()
+    public virtual void ProjectileAttackSupport(int attackType)
     {
-        _animator.SetTrigger("ArrowFlie");
+        _animator.SetInteger("ProjectilelAttackType", attackType);
     }
-
 
     private void ResetAttack()
     {
