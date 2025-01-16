@@ -647,7 +647,28 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      knight-sprite-sheet_0: -8303494427623346420
+      knight-sprite-sheet_1: 1037293568942500303
+      knight-sprite-sheet_10: 1162432757164642705
+      knight-sprite-sheet_11: 8418921686504393918
+      knight-sprite-sheet_12: 6708878988714058211
+      knight-sprite-sheet_13: 5733778960031242931
+      knight-sprite-sheet_14: -7026029193170166581
+      knight-sprite-sheet_15: -3322464827177268336
+      knight-sprite-sheet_16: 6369180062530415393
+      knight-sprite-sheet_17: 3459283256922261370
+      knight-sprite-sheet_18: 5780068787379805201
+      knight-sprite-sheet_19: 2860552294518829456
+      knight-sprite-sheet_2: -7988854923098343077
+      knight-sprite-sheet_20: -1972244478962653977
+      knight-sprite-sheet_3: -9047702373327798199
+      knight-sprite-sheet_4: -8573459208291537429
+      knight-sprite-sheet_5: 7534629521671081927
+      knight-sprite-sheet_6: 5275231013544602398
+      knight-sprite-sheet_7: -4662759730185315459
+      knight-sprite-sheet_8: 6061674158717617322
+      knight-sprite-sheet_9: -5663625982418247392
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
