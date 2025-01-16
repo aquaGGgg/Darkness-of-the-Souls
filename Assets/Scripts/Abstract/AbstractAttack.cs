@@ -15,7 +15,6 @@ public abstract class AbstractAttack : MonoBehaviour
     {
         dmg = attakDamage;
         _animator.SetInteger("AttackType",attackType);
-        Invoke("ResetAttack", _animator.GetCurrentAnimatorStateInfo(0).length +0.1f); 
     }
 
     /// <summary>
@@ -32,7 +31,7 @@ public abstract class AbstractAttack : MonoBehaviour
         _animator.SetInteger("ProjectilelAttackType", attackType);
     }
 
-    private void ResetAttack()
+    public void ResetAttack()
     {
         _animator.SetInteger("AttackType",0);
     }

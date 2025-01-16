@@ -12,9 +12,11 @@ public class CharacterAttack : AbstractAttack
     {
         if(Input.GetKeyDown(KeyCode.K)){ // слабая атака
             Attack(1, WeaponDamage);
+            Invoke("ResetAttack", 0.3f);
         }
         if(Input.GetKeyDown(KeyCode.J)){ // сильная атака
-            Attack(2, WeaponDamage * 3); 
+            Attack(2, WeaponDamage * 3);
+            Invoke("ResetAttack", 1f);
         }
     }
 }

@@ -27,7 +27,7 @@ public class MobAI : MonoBehaviour
         Vector2 playerPosition = player.position;
         if (Vector2.Distance(transform.position, playerPosition) <= aggroRadius * 2 && CanSeePlayer(playerPosition))
         {
-            _targetPosition = Vector2.Distance(transform.position, playerPosition) >= stopDistance ? playerPosition : transform.position;
+            _targetPosition = Vector2.Distance(transform.position, playerPosition) >= stopDistance ? playerPosition : transform.position; 
         }
         else if (Vector2.Distance(transform.position, _targetPosition) <= 0.1f)
         {
@@ -38,7 +38,8 @@ public class MobAI : MonoBehaviour
         MoveToTarget();
         UpdateAnimation();
 
-        Debug.Log(_targetPosition);
+        Debug.Log(Vector2.Distance(transform.position, playerPosition) >= stopDistance ? playerPosition : transform.position);
+        Debug.Log(Vector2.Distance(transform.position, playerPosition) <= aggroRadius * 2 && CanSeePlayer(playerPosition));
     }
 
     private bool CanSeePlayer(Vector2 playerPosition)
