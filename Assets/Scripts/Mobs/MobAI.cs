@@ -27,7 +27,7 @@ public class MobAI : MonoBehaviour
         Vector2 playerPosition = player.position;
         if (Vector2.Distance(transform.position, playerPosition) <= aggroRadius * 2 && CanSeePlayer(playerPosition))
         {
-            _targetPosition = Vector2.Distance(transform.position, playerPosition) >= stopDistance ? playerPosition : transform.position; 
+            _targetPosition = new Vector2(playerPosition.x, transform.position.y);
         }
         else if (Vector2.Distance(transform.position, _targetPosition) <= 0.1f)
         {
