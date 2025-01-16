@@ -8,54 +8,45 @@ public class MobAI : MonoBehaviour
     [SerializeField] private float stopDistance = 1f;  // Расстояние остановки от игрока
     [SerializeField] private int speed;                // Скорость движения моба
 
-    private Vector2 _leftPatrolPoint;
-    private Vector2 _rightPatrolPoint;
-    private Vector2 _targetPosition;
+    private Vector2 _leftPatrolPoint, _rightPatrolPoint, _targetPosition;
     private Animator _animator;
+    [SerializeField] private LayerMask visionMask;     // Маска для определения видимости игрока
 
     private void Start()
     {
-        Vector2 startPosition = transform.position;
-        _leftPatrolPoint = startPosition - Vector2.right * patrolDistance / 2f;
-        _rightPatrolPoint = startPosition + Vector2.right * patrolDistance / 2f;
+        _leftPatrolPoint = (Vector2)transform.position - Vector2.right * patrolDistance / 2f;
+        _rightPatrolPoint = (Vector2)transform.position + Vector2.right * patrolDistance / 2f;
         _targetPosition = _rightPatrolPoint;
         _animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if (_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("attack") && _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
-        {
-            UpdateAnimation();
-            return;
-        }
+        if (_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("attack") && _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f) return;
 
         Vector2 playerPosition = player.position;
-        float distanceToPlayer = Vector2.Distance(transform.position, playerPosition);
-
-        if (distanceToPlayer <= aggroRadius * 2)
+        if (Vector2.Distance(transform.position, playerPosition) <= aggroRadius * 2 && CanSeePlayer(playerPosition))
         {
-            _targetPosition = distanceToPlayer > stopDistance ? playerPosition : transform.position;
-            FlipTowards(playerPosition);
+            _targetPosition = Vector2.Distance(transform.position, playerPosition) >= stopDistance ? playerPosition : transform.position;
         }
-        else
-        {
-            Patrol();
-        }
-
-        MoveToTarget();
-        UpdateAnimation();
-
-    }
-
-    private void Patrol()
-    {
-        if (Vector2.Distance(transform.position, _targetPosition) <= 0.1f)
+        else if (Vector2.Distance(transform.position, _targetPosition) <= 0.1f)
         {
             _targetPosition = _targetPosition == _leftPatrolPoint ? _rightPatrolPoint : _leftPatrolPoint;
         }
+        
         FlipTowards(_targetPosition);
+        MoveToTarget();
+        UpdateAnimation();
+
+        Debug.Log(_targetPosition);
     }
+
+    private bool CanSeePlayer(Vector2 playerPosition)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, (playerPosition - (Vector2)transform.position).normalized, aggroRadius, visionMask);
+        return hit.collider != null && hit.collider.CompareTag("Player");
+    }
+
 
     private void MoveToTarget()
     {
@@ -73,7 +64,6 @@ public class MobAI : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        bool isMoving = !(_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("attack") && _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f) && Vector2.Distance(transform.position, _targetPosition) > 0.05f;
-        _animator.SetBool("IsWalking", isMoving);
+        _animator.SetBool("IsWalking", Vector2.Distance(transform.position, _targetPosition) > 0.05f);
     }
 }
