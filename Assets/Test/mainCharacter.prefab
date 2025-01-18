@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6931908755859238395}
   - component: {fileID: 4538109495859228187}
   - component: {fileID: 3365507202087861983}
+  - component: {fileID: 6558639799709913785}
   m_Layer: 0
   m_Name: mainCharacter
   m_TagString: Player
@@ -217,6 +218,22 @@ MonoBehaviour:
   MaxHp: 150
   hp: 100
   healModifier: 20
+--- !u!114 &6558639799709913785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321491445122244165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f05782428002640a4b32ab9922c9bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 6931908755859238395}
+  baseDamage: 5
+  Weapons:
+  - {fileID: 7121819196291086482}
 --- !u!1 &7121819196291086482
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +245,6 @@ GameObject:
   - component: {fileID: 5224760050860912542}
   - component: {fileID: 6406580044117996924}
   - component: {fileID: 7405109817135578503}
-  - component: {fileID: 6894912095364059120}
   m_Layer: 0
   m_Name: testSword
   m_TagString: Weapon
@@ -352,17 +368,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6894912095364059120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7121819196291086482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0f05782428002640a4b32ab9922c9bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 6931908755859238395}
-  WeaponDamage: 0

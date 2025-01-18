@@ -1,21 +1,27 @@
 using UnityEngine;
+using UnityEditor;
+using UnityEditor.Animations;
 
 public class MobAttack : AbstractAttack
 {
     public int MobDamage;
 
     private int _NumberOfNonEmptyStates;
-    private Vector2 wallPosicion;
+    private Vector2 wallPosicion; // переменная хранит позицию стены стену, чтоб не бить через стену
 
     void Start()
     {
-        wallPosicion = new Vector2(99999,99999);
-        _NumberOfNonEmptyStates = _animator.runtimeAnimatorController.animationClips.Length - 3;// c добовление механик не связаных с атакой моба изменить число
+        wallPosicion = new Vector2(99999,99999); // чтобы избежать null poiter exaption, такое значение для корректной рабботы атаки
+
+
+        // Получаем колличество анимааций на нулевом слое и вычитаем колличаство анимаций не связаных с аттакой
+        _NumberOfNonEmptyStates = (_animator.runtimeAnimatorController as AnimatorController).layers[0].stateMachine.states.Length - 3;
+
     }
 
     void OnTriggerStay2D(Collider2D c)
     {
-        if (c.gameObject.CompareTag("Wall"))
+        if (c.gameObject.CompareTag("Wall")) // обнавляет позицию стены
         {
             wallPosicion = c.gameObject.transform.position;
         }

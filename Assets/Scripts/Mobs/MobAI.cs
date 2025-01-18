@@ -7,10 +7,10 @@ public class MobAI : MonoBehaviour
     [SerializeField] private Transform player;         // Ссылка на объект игрока
     [SerializeField] private float stopDistance = 1f;  // Расстояние остановки от игрока
     [SerializeField] private int speed;                // Скорость движения моба
+    [SerializeField] private LayerMask visionMask;     // Маска для определения видимости игрока
 
     private Vector2 _leftPatrolPoint, _rightPatrolPoint, _targetPosition;
     private Animator _animator;
-    [SerializeField] private LayerMask visionMask;     // Маска для определения видимости игрока
 
     private void Start()
     {
@@ -38,8 +38,6 @@ public class MobAI : MonoBehaviour
         MoveToTarget();
         UpdateAnimation();
 
-        Debug.Log(Vector2.Distance(transform.position, playerPosition) >= stopDistance ? playerPosition : transform.position);
-        Debug.Log(Vector2.Distance(transform.position, playerPosition) <= aggroRadius * 2 && CanSeePlayer(playerPosition));
     }
 
     private bool CanSeePlayer(Vector2 playerPosition)
