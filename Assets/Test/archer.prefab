@@ -379,10 +379,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolDistance: 4
-  aggroRadius: 6
+  aggroRadius: 10
   player: {fileID: 0}
   stopDistance: 5
   speed: 3
+  visionMask:
+    serializedVersion: 2
+    m_Bits: 72
 --- !u!61 &3135113550428355695
 BoxCollider2D:
   m_ObjectHideFlags: 0

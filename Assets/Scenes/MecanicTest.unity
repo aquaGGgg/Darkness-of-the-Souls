@@ -348,11 +348,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &569287070 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6287522647318974495, guid: 352c1acc7f7677c47bc4727367f82eaa, type: 3}
-  m_PrefabInstance: {fileID: 3264609370932458450}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1755693423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -362,16 +357,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 74028879546449061, guid: b8187248d3395b94191918d8f15deae2, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 4.9261
-      objectReference: {fileID: 0}
-    - target: {fileID: 74028879546449061, guid: b8187248d3395b94191918d8f15deae2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.53
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 74028879546449061, guid: b8187248d3395b94191918d8f15deae2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.69
+      value: -1.74
       objectReference: {fileID: 0}
     - target: {fileID: 74028879546449061, guid: b8187248d3395b94191918d8f15deae2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -408,6 +399,10 @@ PrefabInstance:
     - target: {fileID: 4272033363221665507, guid: b8187248d3395b94191918d8f15deae2, type: 3}
       propertyPath: m_Name
       value: WallReference
+      objectReference: {fileID: 0}
+    - target: {fileID: 4272033363221665507, guid: b8187248d3395b94191918d8f15deae2, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -504,7 +499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4538109495859228187, guid: ed8d40646ec094145a2a9cea72b37e33, type: 3}
       propertyPath: _collisionMask.m_Bits
-      value: 1
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 6894912095364059120, guid: ed8d40646ec094145a2a9cea72b37e33, type: 3}
       propertyPath: m_Enabled
@@ -595,22 +590,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6529424126367275082, guid: 352c1acc7f7677c47bc4727367f82eaa, type: 3}
-      propertyPath: _animator
-      value: 
-      objectReference: {fileID: 569287070}
     - target: {fileID: 7556506651927503194, guid: 352c1acc7f7677c47bc4727367f82eaa, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 5365684}
-    - target: {fileID: 7556506651927503194, guid: 352c1acc7f7677c47bc4727367f82eaa, type: 3}
-      propertyPath: aggroRadius
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7556506651927503194, guid: 352c1acc7f7677c47bc4727367f82eaa, type: 3}
-      propertyPath: visionMask.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -752,6 +735,10 @@ PrefabInstance:
     - target: {fileID: 5758903578281082264, guid: a2c228326b405d04aa3cdc6652a83800, type: 3}
       propertyPath: stopDistance
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5758903578281082264, guid: a2c228326b405d04aa3cdc6652a83800, type: 3}
+      propertyPath: visionMask.m_Bits
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 6685091374688523346, guid: a2c228326b405d04aa3cdc6652a83800, type: 3}
       propertyPath: m_Enabled

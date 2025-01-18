@@ -24,8 +24,6 @@ public class Controller : MonoBehaviour
         _animator = GetComponent<Animator>();
         _defaultScale = transform.localScale;
 
-        Collider2D myCollider = GetComponent<Collider2D>();
-        Physics2D.IgnoreCollision(myCollider, myCollider);
     }
 
     void Update()
@@ -65,15 +63,13 @@ public class Controller : MonoBehaviour
         Vector2 dashDirection = new Vector2(Mathf.Sign(direction), 0);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dashDirection, _dashDistance, _collisionMask);
 
-        if (hit.collider.gameObject.CompareTag("Wall"))
+        if (hit.collider != null) 
         {
-            Debug.Log(hit.collider.gameObject);
             // Если есть стена, рывок до стены
             transform.position = new Vector3(hit.point.x - Mathf.Sign(direction) * 0.1f, transform.position.y, transform.position.z);
         }
         else
         {
-            Debug.Log("asd");
             // Если путь свободен, выполняем полный рывок
             transform.position += new Vector3(dashDirection.x * _dashDistance, 0, 0);
         }
