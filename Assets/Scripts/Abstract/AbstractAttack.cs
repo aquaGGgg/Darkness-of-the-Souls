@@ -26,11 +26,35 @@ public abstract class AbstractAttack : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// функция для переключения атак в комбо
+    /// </summary>
+    public void ComboCompliter()
+    {
+        _animator.SetInteger("ComboCounter", _animator.GetInteger("ComboCounter") + 1);
+    }
+
+    /// <summary>
+    /// функция принудительного завершения комбо
+    /// </summary>
+    public void EndCombo()
+    {
+        _animator.SetInteger("ComboCounter", 0);
+    }
+
+
+    /// <summary>
+    /// функция запускающая анимацию полета проджектайла
+    /// </summary>
+    /// <param name="attackType">номер атаки в AttackType</param>
     public virtual void ProjectileAttackSupport(int attackType)
     {
         _animator.SetInteger("ProjectilelAttackType", attackType);
     }
 
+    /// <summary>
+    /// функиця для завершения атаки, но не комбо
+    /// </summary>
     public void ResetAttack()
     {
         _animator.SetInteger("AttackType",0);
