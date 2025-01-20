@@ -4,7 +4,7 @@ public class CharacterAttack : AbstractAttack
 {
 
     [SerializeField] private int baseDamage; // бызавый чарактера
-    [SerializeField] private GameObject[] Weapons; // бызавый чарактера
+    [SerializeField] private GameObject[] Weapons; // набор оружия
 
 
     private int WeaponInHand = 1;

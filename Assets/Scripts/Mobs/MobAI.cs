@@ -5,7 +5,7 @@ public class MobAI : MonoBehaviour
     [SerializeField] private float patrolDistance = 5f; // Длина маршрута патрулирования
     [SerializeField] private float aggroRadius = 2f;    // Радиус агра на игрока
     [SerializeField] private Transform player;         // Ссылка на объект игрока
-    [SerializeField] private float stopDistance = 1f;  // Расстояние остановки от игрока
+    //[SerializeField] private float stopDistance = 1f;  // Расстояние остановки от игрока
     [SerializeField] private int speed;                // Скорость движения моба
     [SerializeField] private LayerMask visionMask;     // Маска для определения видимости игрока
 
