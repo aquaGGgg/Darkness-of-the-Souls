@@ -9,6 +9,7 @@ public abstract class AbstractHealth : MonoBehaviour
     protected int hp;
 
 
+
     private Animator _animator;
 
     void Start()
@@ -44,4 +45,5 @@ public abstract class AbstractHealth : MonoBehaviour
 
 
     private void Dead() => Destroy(gameObject);
+
 }

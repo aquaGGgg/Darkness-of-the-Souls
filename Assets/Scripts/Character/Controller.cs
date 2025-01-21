@@ -1,7 +1,10 @@
 using UnityEngine;
+using System;
 
 public class Controller : MonoBehaviour
 {
+    public static event Action<int> UnlockScill;
+
     [SerializeField]
     private float _speed;
     [SerializeField]
@@ -12,11 +15,20 @@ public class Controller : MonoBehaviour
     [SerializeField]
     private LayerMask _collisionMask; // Маска для определения препятствий
 
+    [SerializeField]
+    private int _BigSoils; // число выбитых больших душь
+
+
+    [SerializeField]
+    private int _SmallSoils; // число больших душь
+
     private Rigidbody2D _rb;
     private Animator _animator;
 
     private Vector3 _defaultScale;
     private bool _isGrounded;
+
+    private bool _SoulEating = false; // флаг для избежания дввайного вызова UnlockScill
 
     void Awake()
     {
@@ -55,15 +67,18 @@ public class Controller : MonoBehaviour
         {
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _jumpForce);
         }
+
+
+
     }
 
-    private void Dash(float direction) 
+    private void Dash(float direction)
     {
 
         Vector2 dashDirection = new Vector2(Mathf.Sign(direction), 0);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dashDirection, _dashDistance, _collisionMask);
 
-        if (hit.collider != null) 
+        if (hit.collider != null)
         {
             // Если есть стена, рывок до стены
             transform.position = new Vector3(hit.point.x - Mathf.Sign(direction) * 0.1f, transform.position.y, transform.position.z);
@@ -82,6 +97,11 @@ public class Controller : MonoBehaviour
             _animator.SetBool("IsJump", false);
             _isGrounded = true;
         }
+
+        if (collision.gameObject.CompareTag("Soul"))
+        {
+            _SmallSoils++;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -92,4 +112,43 @@ public class Controller : MonoBehaviour
             _isGrounded = false;
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Debug.Log(_BigSoils);
+        if (collision.gameObject.CompareTag("BigSoul") && _SoulEating == false)
+        {
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                _SoulEating = true;
+                Destroy(collision.gameObject);
+                UnlockScill(_BigSoils);
+                _BigSoils++;
+                Invoke("restEating", 1f);
+            }
+            else if (Input.GetKeyUp(KeyCode.Q))
+            {
+                _SoulEating = true;
+                Destroy(collision.gameObject);
+                UnlockScill(_BigSoils + 7);
+                _BigSoils++;
+                Invoke("restEating", 1f);
+            }
+            else if (Input.GetKeyUp(KeyCode.R)) // уничтожение большой души
+            {
+                _SoulEating = true;
+                Destroy(collision.gameObject);
+                _BigSoils++;
+                Invoke("restEating", 1f);
+            }
+
+        }
+    }
+
+    private void restEating()
+    {
+        _SoulEating = false;
+    }
+
 }
+ 

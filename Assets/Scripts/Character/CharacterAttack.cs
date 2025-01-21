@@ -1,10 +1,18 @@
 using UnityEngine;
+using Attacks;
+
 
 public class CharacterAttack : AbstractAttack
 {
-
+    [SerializeField] private CharakterSkils[] AllAttacks; //  Все прокачиваемые атаки
+    
     [SerializeField] private int baseDamage; // бызавый чарактера
     [SerializeField] private GameObject[] Weapons; // набор оружия
+
+    void Start()
+    {
+        Controller.UnlockScill += UnlockScill;
+    }
 
 
     private int WeaponInHand = 1;
@@ -12,20 +20,39 @@ public class CharacterAttack : AbstractAttack
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.K)){ // слабая атака
+        if(Input.GetKeyDown(KeyCode.K)){ //атака закрепленная всегда 
             Attack(1, baseDamage);
             Invoke("ResetAttack", 0.3f);
         }
+
+
         if(Input.GetKeyDown(KeyCode.J)){ // сильная атака
             Attack(2, baseDamage * 3);
             Invoke("ResetAttack", 1f);
         }
+        if (Input.GetKeyDown(KeyCode.I))// слабая атака
+        { 
+            Attack(1, baseDamage);
+            Invoke("ResetAttack", 0.3f);
+        }
+        if (Input.GetKeyDown(KeyCode.O))// сильная атака
+        { 
+            Attack(2, baseDamage * 3);
+            Invoke("ResetAttack", 1f);
+        }
     }
+    
 
     private void WeaponSwap() // функция для "смены" оружия в руках
     {
         Weapons[WeaponInHand].SetActive(false);
         WeaponInHand = (WeaponInHand + 1) % Weapons.Length;
         Weapons[WeaponInHand -1].SetActive(true);
+    }
+
+
+    public void UnlockScill(int BS) // функция открытия скилов
+    {
+        AllAttacks[BS].isUnlok = true;
     }
 }
