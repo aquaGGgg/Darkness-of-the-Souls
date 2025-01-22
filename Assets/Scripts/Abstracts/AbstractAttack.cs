@@ -4,7 +4,7 @@ public abstract class AbstractAttack : MonoBehaviour
 {
     public Animator _animator;
 
-    private int dmg;
+    private int _dmg;
 
     /// <summary>
     /// метод вызывающий атаку
@@ -47,6 +47,8 @@ public abstract class AbstractAttack : MonoBehaviour
     /// функция запускающая анимацию полета проджектайла
     /// </summary>
     /// <param name="attackType">номер атаки в AttackType</param>
+    /// 
+    // переписать для ренживиков.
     public virtual void ProjectileAttackSupport(int attackType)
     {
         _animator.SetInteger("ProjectilelAttackType", attackType);
