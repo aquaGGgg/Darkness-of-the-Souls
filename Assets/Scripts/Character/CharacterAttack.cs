@@ -6,7 +6,6 @@ using Attacks;
 public class CharacterAttack : AbstractAttack
 {
     [SerializeField] private CharakterSkils[] AllAttacks; //  Все прокачиваемые атаки
-    
     [SerializeField] private int baseDamage; // бызавый чарактера
     [SerializeField] private List<int> UsesSkillsIndex; // набор оружия
     [SerializeField] private GameObject[] Weapons; // набор оружия
