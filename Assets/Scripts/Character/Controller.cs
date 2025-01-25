@@ -4,6 +4,7 @@ using System;
 public class Controller : MonoBehaviour
 {
     public static event Action<int> UnlockScill;
+    public static event Action Rest;
 
     [SerializeField]
     private float _speed;
@@ -97,11 +98,6 @@ public class Controller : MonoBehaviour
             _animator.SetBool("IsJump", false);
             _isGrounded = true;
         }
-
-        if (collision.gameObject.CompareTag("Soul"))
-        {
-            _SmallSoils++;
-        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -115,7 +111,6 @@ public class Controller : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log(_BigSoils);
         if (collision.gameObject.CompareTag("BigSoul") && _SoulEating == false)
         {
             if (Input.GetKeyUp(KeyCode.E))
@@ -143,12 +138,18 @@ public class Controller : MonoBehaviour
             }
 
         }
+
+        if (collision.gameObject.CompareTag("Fire"))
+        {
+            if (Input.GetKeyUp(KeyCode.E))
+                Rest?.Invoke();
+        }
     }
 
     private void restEating()
     {
         _SoulEating = false;
     }
+    
 
 }
- 
